@@ -9,7 +9,7 @@ const secondLineAnswer = document.getElementById("secondLineAnswer");
 const thirdLineAnswer = document.getElementById("thirdLineAnswer");
 
 
-//takes input and splits it up for datamuse query
+//takes input and splits it up for datamuse query - for searching words & phrases
 const firstURLString = firstLine.split(" ").join("+");
 const secondURLString = secondLine.split(" ").join("+");
 const thirdURLString = thirdLine.split(" ").join("+");
@@ -34,7 +34,6 @@ fetch(`http://api.datamuse.com/words?ml=${thirdURLString}&md=s`)
   .then((response) => response.json())
   .then((data) => {
     console.log(data) 
-    console.log(getCorrectSyllables(data, 5))
     thirdLineAnswer.innerHTML=getCorrectSyllables(data, 5);
   });
 
@@ -56,19 +55,27 @@ const getCorrectSyllables = (array, number) => {
       return array[i]['word'];
     }
 
-  //   //otherwise, creates a map of other syllable lengths and their indexes
-  //   if (array[i]['numSyllables'] < number) {
-  //     if (sylLengths.includes(array[i]['numSyllables'])){
-  //       sylIndexes[sylLengths.indexOf(array[i]['numSyllables'])].push(i);
-  //     } else {
-  //       sylLengths.push(array[i]['numSyllables']);
-  //       sylIndexes.push([i]);
-  //     }
-  //   }
-  // }
-  // console.log(sylLengths);
-  // console.log(sylIndexes); 
+    //otherwise, creates a map of other syllable lengths and their indexes
+    if (array[i]['numSyllables'] < number) {
+      if (sylLengths.includes(array[i]['numSyllables'])){
+        sylIndexes[sylLengths.indexOf(array[i]['numSyllables'])].push(i);
+      } else {
+        sylLengths.push(array[i]['numSyllables']);
+        sylIndexes.push([i]);
+      }
+    }
   }
+
+//placeholder logic to give an output
+  if (number===7){
+    return array[sylIndexes[sylLengths.indexOf(2)][0]]['word']+" "+array[sylIndexes[sylLengths.indexOf(3)][0]]['word']+" "+array[sylIndexes[sylLengths.indexOf(2)][1]]['word'];
+  }
+  if (number===5){
+    return array[sylIndexes[sylLengths.indexOf(2)][0]]['word']+" "+array[sylIndexes[sylLengths.indexOf(3)][0]]['word'];
+  }
+  console.log(sylLengths);
+  console.log(sylIndexes); 
+  
   return "Not Found, sorry!";
 }
 
