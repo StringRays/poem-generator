@@ -1,0 +1,21 @@
+{
+  "name": "haiku",
+  "version": "1.0.0",
+  "description": "haiku translator",
+  "main": "index.js",
+  "scripts": {
+    "test": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "Haiku"
+  },
+  "keywords": [
+    "poem",
+    "haiku",
+    "words",
+    "translate"
+  ],
+  "author": "Rhea Eckman",
+  "license": "ISC"
+}
