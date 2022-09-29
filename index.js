@@ -1,5 +1,5 @@
 //calls datamuse api for each line
-const makeHaiku = () => {
+function makeHaiku() {
 const firstLine = document.getElementById("first").value;
 const secondLine = document.getElementById("second").value;
 const thirdLine = document.getElementById("third").value;

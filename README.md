@@ -15,3 +15,5 @@
 - add parts of speech logic to make output more structured
 - add buttons/logic for clearing and starting over with new input once once is implemeneted
 - add buttons to update only certain lines
+- add error handling
+- build some objects and such
